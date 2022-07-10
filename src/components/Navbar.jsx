@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 // MUI Icons
 import { Typography } from "@mui/material";
 // import PersonIcon from "@mui/icons-material/Person";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+// import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import Badge from "@mui/material/Badge";
 import { CartContext } from "../context/CartContext";
@@ -111,7 +111,7 @@ const Navbar = (prod) => {
           </Link> */}
 
           {/* Wrapper Two - Wishlist */}
-          <Link
+          {/* <Link
             to="/wishlist"
             style={{
               textDecoration: "none",
@@ -125,7 +125,7 @@ const Navbar = (prod) => {
               </Badge>
               <Typography>Wishlist</Typography>
             </Wrapper>
-          </Link>
+          </Link> */}
 
           {/* Wrapper Three - Cart */}
           <Wrapper>
