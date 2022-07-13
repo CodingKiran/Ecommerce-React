@@ -3,9 +3,8 @@ import products from "../data/Products.json";
 export const initialState = {
   products: products,
   cart: [],
-  productlist :[]
+  productlist: [],
 };
-
 
 export const CartReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -16,15 +15,21 @@ export const CartReducer = (state = initialState, action) => {
         ...state,
         cart: state.cart.filter((c) => c.imgURL !== action.payload.imgURL),
       };
-      case "ONIMGCLICK":
-        return{...state, productlist:[state.productlist, {...action.payload}]}
+    case "ONIMGCLICK":
+      return {
+        ...state,
+        productlist: [state.productlist, { ...action.payload }],
+      };
+
+    case "CHANGE-CART-QTY":
+      return {
+        ...state,
+        cart: state.cart.filter((c) =>
+          c.id === action.payload.id ? (c.qty = action.payload.qty) : c.qty
+        ),
+      };
 
     default:
       return state;
   }
 };
-
-
-  
-  
-

@@ -57,7 +57,7 @@ const Button = styled.button`
   position: absolute;
   margin-left: 0;
   margin-right: auto;
-  bottom: 4px;
+  bottom: 1px;
   left: 0;
   right: 0;
   max-width: 200px;
@@ -66,7 +66,6 @@ const Button = styled.button`
   box-shadow: px 0 10px rgba(0, 0, 0, 0.3);
   background-color: white;
   z-index: 1000;
-  border: 1px solid slategray;
 `;
 
 const Container = styled.div`
