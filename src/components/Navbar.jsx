@@ -30,8 +30,8 @@ const Container = styled.div`
 
 // logo image
 const Image = styled.img`
-  max-width: 100px;
-  cursor: pointer;
+    max-width: 100px;
+    cursor: pointer;
 `;
 
 // search box

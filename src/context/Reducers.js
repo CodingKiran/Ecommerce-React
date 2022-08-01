@@ -6,10 +6,13 @@ export const initialState = {
   productlist: [],
 };
 
+
+
 export const CartReducer = (state = initialState, action) => {
   switch (action.type) {
     case "ADD_TO_CART":
       return { ...state, cart: [...state.cart, { ...action.payload, qty: 1 }] };
+
     case "REMOVE_FROM_CART":
       return {
         ...state,
@@ -28,6 +31,15 @@ export const CartReducer = (state = initialState, action) => {
           c.id === action.payload.id ? (c.qty = action.payload.qty) : c.qty
         ),
       };
+
+    // case "ADD-QTY":
+    //   // eslint-disable-next-line array-callback-return
+    //   state.cart.map((item)=>{
+    //     if(item.id===action.payload.id){
+    //       item.qty++
+    //     }
+    //   })
+    //   return {...state, cart:state.cart};
 
     default:
       return state;

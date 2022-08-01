@@ -4,13 +4,12 @@ import CloseIcon from "@mui/icons-material/Close";
 import styled from "styled-components";
 
 const Container = styled.div`
-  max-width: 500px;
-  width: 100%;
+  max-width: 900px;
   height: 170px;
   position: relative;
-  left: 20%;
+  left: 15%;
 
-  @media (min-width: 320px) and (max-width: 480px) {
+  @media (min-width: 20px) and (max-width: 480px) {
     left: 0.5%;
   }
 `;
@@ -24,9 +23,10 @@ const Wrapper = styled.div`
   padding-top: 5px;
   padding-bottom: 5px;
   margin-right: 5px;
-  margin-left: 3px;
+  margin-left: px;
   justify-content: space-between;
-  margin-bottom: 30px;
+  margin-bottom: 0px;
+  max-width: 500px;
 `;
 
 const Li = styled.li`
@@ -61,14 +61,20 @@ const PriceDetails = styled.div`
 const AmountSection = styled.div`
   display: flex;
   justify-content: space-between;
+
+  @media (min-width: 20px) and (max-width: 480px) {
+    position: relative;
+  }
 `;
 
-const PricingWrapper = styled.div``;
+const PricingWrapper = styled.div`
+  margin-left: 0px;
+`;
 
 const WrapperMini = styled.div`
   display: flex;
   justify-content: space-between;
-  font-weight: 300;
+  font-weight: 00;
   font-size: 14px;
   margin-bottom: 15px;
   position: relative;
@@ -95,8 +101,11 @@ const Bag = () => {
 
   const [total, setTotal] = useState(0);
   const [price, setPrice] = useState(0);
-  const [discount, setDiscount] = useState(0);
+  const [discount, setDiscount] = useState();
 
+  // function handleSubmit(e) {
+  //   e.preventDefault();
+  // }
   useEffect(() => {
     setTotal(
       cart.reduce(
@@ -117,7 +126,13 @@ const Bag = () => {
     );
   }, [cart]);
 
-  return (
+  const noItems = (
+    <div>
+      <p>Cart Feels Light</p>
+    </div>
+  );
+
+  const allItems = (
     <Container>
       {cart.map((prod, index) => (
         <Li key={index}>
@@ -130,11 +145,34 @@ const Bag = () => {
                 <span> {prod.price} </span>
                 <Price1>{prod.price1} </Price1>
                 <Offer>{prod.offer} </Offer>
+
+                <select
+                  value={prod.qty}
+                  onChange={(e) =>
+                    dispatch({
+                      type: "CHANGE-CART-QTY",
+                      payload: { id: prod.id, qty: e.target.value },
+                    })
+                  }
+                >
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+                  <option value="9">9</option>
+                  <option value="10">10</option>
+                </select>
+
+               
               </PriceDetails>
             </Details>
             <CloseIcon
               onClick={() => {
-                dispatch({ type: "REMOVE_FROM_CART", payload: prod, qty: 1 });
+                dispatch({ type: "REMOVE_FROM_CART", payload: prod });
               }}
             ></CloseIcon>
           </Wrapper>
@@ -146,24 +184,30 @@ const Bag = () => {
 
           <WrapperMini>
             <Para>Total MRP</Para>
-            <Span>{price} </Span>
+            <Span>₹{price} </Span>
           </WrapperMini>
           <WrapperMini>
             <Para>Discount on MRP</Para>
-            <Span style={{ color: "green", fontWeight: 500 }}>-({discount})</Span>
+            <Span style={{ color: "green", fontWeight: 500 }}>
+              -₹{discount}
+            </Span>
           </WrapperMini>
           <WrapperMini>
             <Para>Convience Fee</Para>
-            <Span>Rs.99 </Span>
+
+            <Span> ₹{price <= 1000 ? 99 : 0} </Span>
           </WrapperMini>
           <WrapperMini>
             <Para>Total Amount</Para>
-            <Span>{total + 99} </Span>
+
+            <Span>₹{total <= 1000 ? total + 99 : total}</Span>
           </WrapperMini>
         </PricingWrapper>
       </AmountSection>
     </Container>
   );
+
+  return <div>{cart.length === 0 ? noItems : allItems}</div>;
 };
 
 export default Bag;

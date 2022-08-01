@@ -5,6 +5,8 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { CartContext } from "../context/CartContext";
 import { Link } from "react-router-dom";
 
+// import products from "../data/Products.json";
+
 const Price = styled.div`
   display: flex;
   gap: 4px;
@@ -27,7 +29,7 @@ const Image = styled.img`
   min-width: 70px;
   width: 100%;
   max-width: 200px;
-  gap: 10px;
+ 
 `;
 
 const Para = styled.p`
@@ -102,11 +104,42 @@ const Rating = styled.div`
 `;
 
 const ProductItem = (prod, id) => {
-  const { dispatch } = useContext(CartContext);
+  const {
+    state: { cart },
+    dispatch,
+  } = useContext(CartContext);
+
+  const updatedItems = [...cart, {cart:[]}]
+
+  console.log(updatedItems);
+
+  function handleClick() {
+    const items = cart.findIndex((item) =>
+      String(item.heading === { payload: prod.heading })
+    );
+
+    if (items === -1) {
+      
+    } else {
+      console.log("items in cart" + cart.length);
+    }
+    console.log(items);
+    dispatch({ type: "ADD_TO_CART", payload: { ...prod, qty: 1 } });
+
+    // const check_index = cart.findIndex((item) =>  console.log(e.detail++));
+    // if (check_index !== -1) {
+    //     cart[check_index].qty++;
+    //     console.log("Quantity updated:", cart);
+    // } else {
+    //     // cart.push({ ...cart.find((p) => p.id === id), quantity: 1 });
+    //     console.log("The product has been added to cart:", cart );
+    //   }
+  }
 
   return (
     <>
-      <Container>
+      <Container >
+        <li style={{listStyle:"none"}} key={prod.id}>
         <Link to="/productpage">
           <Image
             onClick={() => dispatch({ type: "ONIMGCLICK", payload: prod })}
@@ -116,11 +149,7 @@ const ProductItem = (prod, id) => {
         </Link>
         <Rating>{prod.rating}</Rating>
 
-        <Button
-          onClick={() =>
-            dispatch({ type: "ADD_TO_CART", payload: prod, qty: 1 })
-          }
-        >
+        <Button onClick={handleClick}>
           <FavoriteBorderIcon
             sx={{ fontSize: "medium", padiingRight: "3px" }}
           />
@@ -148,6 +177,7 @@ const ProductItem = (prod, id) => {
             </Offer>
           </Price>
         </DetailsWrapper>
+        </li>
       </Container>
     </>
   );
