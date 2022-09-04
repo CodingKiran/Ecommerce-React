@@ -7,7 +7,7 @@ const Container = styled.div`
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 10px;
-  grid-row-gap: 7.7rem;
+  grid-row-gap: 8rem;
   position: relative;
   float: right;
   transform: translate(-22%);
@@ -15,7 +15,7 @@ const Container = styled.div`
   @media (min-width: 320px) and (max-width: 480px) {
     grid-template-columns: repeat(2, 1fr);
     left: 1%;
-    right: 1%;
+    right: -1%;
     top: -70px;
     transform: translate(0);
   }

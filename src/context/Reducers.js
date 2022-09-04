@@ -6,8 +6,6 @@ export const initialState = {
   productlist: [],
 };
 
-
-
 export const CartReducer = (state = initialState, action) => {
   switch (action.type) {
     case "ADD_TO_CART":
@@ -21,25 +19,16 @@ export const CartReducer = (state = initialState, action) => {
     case "ONIMGCLICK":
       return {
         ...state,
-        productlist: [state.productlist, { ...action.payload }],
+        productlist: [{ ...action.payload }],
       };
 
     case "CHANGE-CART-QTY":
       return {
         ...state,
         cart: state.cart.filter((c) =>
-          c.id === action.payload.id ? (c.qty = action.payload.qty) : c.qty
+          c.imgURL === action.payload.imgURL ? (c.qty = action.payload.qty) : c.qty
         ),
       };
-
-    // case "ADD-QTY":
-    //   // eslint-disable-next-line array-callback-return
-    //   state.cart.map((item)=>{
-    //     if(item.id===action.payload.id){
-    //       item.qty++
-    //     }
-    //   })
-    //   return {...state, cart:state.cart};
 
     default:
       return state;

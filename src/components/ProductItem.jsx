@@ -29,7 +29,6 @@ const Image = styled.img`
   min-width: 70px;
   width: 100%;
   max-width: 200px;
- 
 `;
 
 const Para = styled.p`
@@ -54,9 +53,24 @@ const DetailsWrapper = styled.div`
 `;
 
 const Button = styled.button`
-  display: none;
   text-align: center;
-  position: absolute;
+  width: 100%;
+  margin-left: 0;
+  margin-right: auto;
+  bottom: 1px;
+  left: 0;
+  right: 0;
+  max-width: 200px;
+  text-align: center;
+  padding: 10px;
+  box-shadow: px 0 10px rgba(0, 0, 0, 0.3);
+  background-color: white;
+  z-index: 1000;
+`;
+
+const Button1 = styled.button`
+  text-align: center;
+  width: 100%;
   margin-left: 0;
   margin-right: auto;
   bottom: 1px;
@@ -78,12 +92,13 @@ const Container = styled.div`
     transition: 1s;
   }
 
-  &:hover ${Button} {
+  /* &:hover ${Button} {
     display: block;
-  }
+  } */
 
   @media (min-width: 320px) and (max-width: 480px) {
     top: 25%;
+    left: -1%;
   }
 `;
 
@@ -109,74 +124,69 @@ const ProductItem = (prod, id) => {
     dispatch,
   } = useContext(CartContext);
 
-  const updatedItems = [...cart, {cart:[]}]
-
-  console.log(updatedItems);
-
-  function handleClick() {
-    const items = cart.findIndex((item) =>
-      String(item.heading === { payload: prod.heading })
-    );
-
-    if (items === -1) {
-      
-    } else {
-      console.log("items in cart" + cart.length);
-    }
-    console.log(items);
-    dispatch({ type: "ADD_TO_CART", payload: { ...prod, qty: 1 } });
-
-    // const check_index = cart.findIndex((item) =>  console.log(e.detail++));
-    // if (check_index !== -1) {
-    //     cart[check_index].qty++;
-    //     console.log("Quantity updated:", cart);
-    // } else {
-    //     // cart.push({ ...cart.find((p) => p.id === id), quantity: 1 });
-    //     console.log("The product has been added to cart:", cart );
-    //   }
-  }
-
   return (
     <>
-      <Container >
-        <li style={{listStyle:"none"}} key={prod.id}>
-        <Link to="/productpage">
-          <Image
-            onClick={() => dispatch({ type: "ONIMGCLICK", payload: prod })}
-            src={prod.imgURL}
-            alt=""
-          />
-        </Link>
-        <Rating>{prod.rating}</Rating>
+      <Container>
+        <li style={{ listStyle: "none" }} key={prod.id}>
+          <Link to="/productpage">
+            <Image
+              onClick={() => dispatch({ type: "ONIMGCLICK", payload: prod })}
+              src={prod.imgURL}
+              alt=""
+            />
+          </Link>
+          <Rating>{prod.rating}</Rating>
 
-        <Button onClick={handleClick}>
-          <FavoriteBorderIcon
-            sx={{ fontSize: "medium", padiingRight: "3px" }}
-          />
-          <span style={{ paddingLeft: "5px", fontSize: "16px" }}>
-            Add To Cart
-          </span>
-        </Button>
+          <DetailsWrapper>
+            {cart.some((c) => c.imgURL === prod.imgURL) ? (
+              <Button1
+                onClick={() =>
+                  dispatch({ type: "REMOVE_FROM_CART", payload: prod })
+                }
+              >
+                <FavoriteBorderIcon
+                  sx={{ fontSize: "medium", paddingRight: "3px" }}
+                />
+                <span style={{ paddingLeft: "5px", fontSize: "16px" }}>
+                  Remove From Cart
+                </span>
+              </Button1>
+            ) : (
+              <Button
+                onClick={() =>
+                  dispatch({
+                    type: "ADD_TO_CART",
+                    payload: { ...prod, qty: 1 },
+                  })
+                }
+              >
+                <FavoriteBorderIcon
+                  sx={{ fontSize: "medium", paddingRight: "3px" }}
+                />
+                <span style={{ paddingLeft: "5px", fontSize: "16px" }}>
+                  Add To Cart
+                </span>
+              </Button>
+            )}
 
-        <DetailsWrapper>
-          <h4>{prod.heading}</h4>
+            <h4>{prod.heading}</h4>
 
-          <Para>
-            <span>{prod.desc}...</span>
-          </Para>
+            <Para>
+              <span>{prod.desc}...</span>
+            </Para>
 
-          <Price>
-            <span>{prod.price}</span>
+            <Price>
+              <span>{prod.price}</span>
 
-            <Price1>
-              <span>{prod.price1}</span>
-            </Price1>
+              <Price1>
+                <span>{prod.price1}</span>
+              </Price1>
 
-            <Offer>
-              <span>{prod.offer}</span>
-            </Offer>
-          </Price>
-        </DetailsWrapper>
+              <Offer>
+                <span>{prod.offer}</span>
+              </Offer>
+            </Price>
+          </DetailsWrapper>
         </li>
       </Container>
     </>

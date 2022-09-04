@@ -2,21 +2,26 @@ import React, { useContext } from "react";
 import styled from "styled-components";
 import { CartContext } from "../context/CartContext";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import { Typography } from "@mui/material";
 
 const Li = styled.li`
   list-style: none;
+  width: 80%;
 `;
 
-const ImgWrapper = styled.div``;
+const ImgWrapper = styled.div`
+  position: relative;
+  left: 20%;
+`;
 
 const Image = styled.img`
   width: 100%;
-  max-width: 500px;
+  max-width: 300px;
   padding-left: 0;
 `;
 
-const Heading3 = styled.h3``;
+const Heading3 = styled.h3`
+  font-size: 2rem;
+`;
 
 const Price = styled.span``;
 const Price1 = styled.span`
@@ -33,7 +38,7 @@ const Wrapper = styled.div`
   gap: 5px;
 `;
 
-const Button = styled.div`
+const Button = styled.button`
   background-color: #ff3e6c;
   width: fit-content;
   padding: 10px 20px;
@@ -43,21 +48,38 @@ const Button = styled.div`
   margin-top: 20px;
 `;
 
-const ProductPage = (product) => {
+const DetailsWrapper = styled.div`
+  @media (min-width: 1200px) {
+    position: absolute;
+    left: 40%;
+    top: 150px;
+  }
+`;
+
+const Desc = styled.p`
+  font-size: 20px;
+  margin-bottom: 15px;
+  margin-top: 15px;
+`;
+
+const Container = styled.div``;
+
+const ProductPage = () => {
   const {
     state: { productlist },
     dispatch,
   } = useContext(CartContext);
+
   return (
-    <>
-      <ul>
-        {productlist.map((item, i) => (
-          <Li key={i}>
-            <ImgWrapper>
-              <Image src={item.imgURL} alt="" />
-            </ImgWrapper>
+    <Container>
+      {productlist.map((item, index) => (
+        <Li key={index}>
+          <ImgWrapper>
+            <Image src={item.imgURL} alt="" />
+          </ImgWrapper>
+          <DetailsWrapper>
             <Heading3> {item.heading} </Heading3>
-            <Price> {item.desc} </Price>
+            <Desc> {item.desc} </Desc>
             <Wrapper>
               <Price>{item.price} </Price>
               <Price1>{item.price1}</Price1>
@@ -69,12 +91,12 @@ const ProductPage = (product) => {
               <ShoppingCartIcon
                 sx={{ fontSize: "large", paddingRight: "5px" }}
               />
-              <Typography>ADD TO CART</Typography>
+              Add To Cart
             </Button>
-          </Li>
-        ))}
-      </ul>
-    </>
+          </DetailsWrapper>
+        </Li>
+      ))}
+    </Container>
   );
 };
 

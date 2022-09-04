@@ -103,9 +103,6 @@ const Bag = () => {
   const [price, setPrice] = useState(0);
   const [discount, setDiscount] = useState();
 
-  // function handleSubmit(e) {
-  //   e.preventDefault();
-  // }
   useEffect(() => {
     setTotal(
       cart.reduce(
@@ -114,13 +111,13 @@ const Bag = () => {
       )
     );
     setPrice(
-      cart.reduce((acc, curr) => acc + Number(curr.price1.split(".")[1]), 0)
+      cart.reduce((acc, curr) => acc + Number(curr.price1.split(".")[1]*curr.qty), 0)
     );
 
     setDiscount(
       cart.reduce(
         (acc, curr) =>
-          acc + Number(curr.price1.split(".")[1] - curr.price.split(".")[1]),
+          acc + Number(curr.price1.split(".")[1] - curr.price.split(".")[1])*curr.qty,
         0
       )
     );
@@ -151,7 +148,7 @@ const Bag = () => {
                   onChange={(e) =>
                     dispatch({
                       type: "CHANGE-CART-QTY",
-                      payload: { id: prod.id, qty: e.target.value },
+                      payload: { imgURL: prod.imgURL, qty: e.target.value },
                     })
                   }
                 >
@@ -166,8 +163,6 @@ const Bag = () => {
                   <option value="9">9</option>
                   <option value="10">10</option>
                 </select>
-
-               
               </PriceDetails>
             </Details>
             <CloseIcon
@@ -193,7 +188,7 @@ const Bag = () => {
             </Span>
           </WrapperMini>
           <WrapperMini>
-            <Para>Convience Fee</Para>
+            <Para>Convenience Fee</Para>
 
             <Span> ₹{price <= 1000 ? 99 : 0} </Span>
           </WrapperMini>
