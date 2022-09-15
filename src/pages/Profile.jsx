@@ -18,7 +18,7 @@ const Profile = () => {
     setIsLoggedIn(true);
     const newPerson = { ...name };
     try {
-      const response = await fetch("http://localhost:8080/profile", {
+       await fetch("http://localhost:8080/profile", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -26,8 +26,7 @@ const Profile = () => {
         body: JSON.stringify(newPerson),
       });
 
-      const result = await response.json();
-      return result;
+      
     } catch (error) {
       console.log(error);
     }

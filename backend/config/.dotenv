@@ -1,0 +1,2 @@
+DB_STRING =  mongodb+srv://kirankumar:ecomkiran@ecom.2g5boxz.mongodb.net/?retryWrites=true&w=majority
+PORT = 8080

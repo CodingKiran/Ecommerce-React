@@ -2,11 +2,12 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const MongoClient = require("mongodb").MongoClient;
 const cors = require("cors");
-
+require('dotenv').config({path:'./config/.dotenv'})
 const app = express();
 
-const connectionString =
-  "mongodb+srv://kirankumar:ecomkiran@ecom.2g5boxz.mongodb.net/?retryWrites=true&w=majority";
+const connectionString = process.env.DB_STRING
+
+  
 MongoClient.connect(connectionString, { useUnifiedTopology: true }).then(
   (client) => {
     console.log("Connected to Database");
