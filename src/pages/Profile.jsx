@@ -4,38 +4,70 @@ import styled from "styled-components";
 const Container = styled.div``;
 const Profile = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [name, setName] = useState("");
-  function handleClick(e) {
+  const [name, setName] = useState({
+    name: "",
+    password: "",
+  });
+
+  //  function handleClick(e){
+  //   e.preventDefault()
+  //   setIsLoggedIn(true)
+  // }
+  async function handleSubmit(e) {
     e.preventDefault();
+    setIsLoggedIn(true);
+    const newPerson = { ...name };
+    try {
+      const response = await fetch("http://localhost:8080/profile", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newPerson),
+      });
+
+      const result = await response.json();
+      return result;
+    } catch (error) {
+      console.log(error);
+    }
+
+    setName({ name: "", password: "" });
     setIsLoggedIn(true);
   }
 
-  function handleChange(e) {
-    setName(e.target.value);
+  function updateForm(value) {
+    return setName((prev) => {
+      return { ...prev, ...value };
+    });
   }
-  const loggedTrue = <h1> Welcome {name} </h1>;
+
+  const loggedTrue = <h1> Welcome {name.name} </h1>;
   const loginForm = (
     <>
       <Container>
-        <h1> Login Page</h1>
+        <div>
+          <form onSubmit={handleSubmit} action="" method="POST">
+            <input
+              value={name.name}
+              onChange={(e) => updateForm({ name: e.target.value })}
+              type="text"
+              name="name"
+              placeholder="Name"
+            />
+            <br />
 
-        <form action="" method="post">
-          <input
-            onChange={handleChange}
-            value={name}
-            type="text"
-            name="name"
-            placeholder="Name"
-            required="true"
-          />
-          <br />
-
-          <input type="Password" name="Password" placeholder="Password" />
-          <br />
-          <button onClick={handleClick} type="submit">
-            Login
-          </button>
-        </form>
+            <input
+              value={name.password}
+              onChange={(e) => updateForm({ password: e.target.value })}
+              type="Password"
+              name="password"
+              placeholder="Password"
+            />
+            <br />
+            <button type="submit">Login</button>
+          </form>
+        </div>
       </Container>
     </>
   );

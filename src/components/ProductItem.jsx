@@ -54,12 +54,9 @@ const DetailsWrapper = styled.div`
 
 const Button = styled.button`
   text-align: center;
+  margin-bottom: 10px;
   width: 100%;
-  margin-left: 0;
-  margin-right: auto;
-  bottom: 1px;
-  left: 0;
-  right: 0;
+  
   max-width: 200px;
   text-align: center;
   padding: 10px;
@@ -70,12 +67,8 @@ const Button = styled.button`
 
 const Button1 = styled.button`
   text-align: center;
+  margin-bottom: 10px;
   width: 100%;
-  margin-left: 0;
-  margin-right: auto;
-  bottom: 1px;
-  left: 0;
-  right: 0;
   max-width: 200px;
   text-align: center;
   padding: 10px;

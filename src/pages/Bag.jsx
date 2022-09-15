@@ -7,7 +7,9 @@ const Container = styled.div`
   max-width: 900px;
   height: 170px;
   position: relative;
-  left: 15%;
+  left: 50%;
+  translate: -30%;
+  
 
   @media (min-width: 20px) and (max-width: 480px) {
     left: 0.5%;
@@ -25,7 +27,7 @@ const Wrapper = styled.div`
   margin-right: 5px;
   margin-left: px;
   justify-content: space-between;
-  margin-bottom: 0px;
+  margin-bottom: 20px;
   max-width: 500px;
 `;
 
@@ -43,7 +45,9 @@ const Heading4 = styled.h4`
   margin-top: 12px;
 `;
 
-const Details = styled.div``;
+const Details = styled.div`
+
+`;
 
 const Price1 = styled.span`
   color: grey;
@@ -56,6 +60,8 @@ const Offer = styled.span`
 
 const PriceDetails = styled.div`
   margin-top: 8px;
+  display: flex;
+  gap: 5px;
 `;
 
 const AmountSection = styled.div`
@@ -85,6 +91,7 @@ const Heading41 = styled.h5`
   font-weight: 500;
   font-size: 14px;
   margin-bottom: 10px;
+  margin-top: 30px;
 `;
 
 const Para = styled.p``;
@@ -143,7 +150,7 @@ const Bag = () => {
                 <Price1>{prod.price1} </Price1>
                 <Offer>{prod.offer} </Offer>
 
-                <select
+                <select  focused style={{border:"solid black"}}
                   value={prod.qty}
                   onChange={(e) =>
                     dispatch({
