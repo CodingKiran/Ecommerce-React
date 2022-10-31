@@ -9,10 +9,10 @@ const Container = styled.div`
   position: relative;
   left: 50%;
   translate: -30%;
-  
 
-  @media (min-width: 20px) and (max-width: 480px) {
+  @media (min-width: 360px) and (max-width: 480px) {
     left: 0.5%;
+    translate: 0%;
   }
 `;
 
@@ -45,9 +45,7 @@ const Heading4 = styled.h4`
   margin-top: 12px;
 `;
 
-const Details = styled.div`
-
-`;
+const Details = styled.div``;
 
 const Price1 = styled.span`
   color: grey;
@@ -68,7 +66,7 @@ const AmountSection = styled.div`
   display: flex;
   justify-content: space-between;
 
-  @media (min-width: 20px) and (max-width: 480px) {
+  @media (min-width: 360px) and (max-width: 480px) {
     position: relative;
   }
 `;
@@ -118,13 +116,18 @@ const Bag = () => {
       )
     );
     setPrice(
-      cart.reduce((acc, curr) => acc + Number(curr.price1.split(".")[1]*curr.qty), 0)
+      cart.reduce(
+        (acc, curr) => acc + Number(curr.price1.split(".")[1] * curr.qty),
+        0
+      )
     );
 
     setDiscount(
       cart.reduce(
         (acc, curr) =>
-          acc + Number(curr.price1.split(".")[1] - curr.price.split(".")[1])*curr.qty,
+          acc +
+          Number(curr.price1.split(".")[1] - curr.price.split(".")[1]) *
+            curr.qty,
         0
       )
     );
@@ -150,7 +153,9 @@ const Bag = () => {
                 <Price1>{prod.price1} </Price1>
                 <Offer>{prod.offer} </Offer>
 
-                <select  focused style={{border:"solid black"}}
+                <select
+                  focused
+                  style={{ border: "solid black" }}
                   value={prod.qty}
                   onChange={(e) =>
                     dispatch({
