@@ -154,7 +154,7 @@ const Bag = () => {
                 <Offer>{prod.offer} </Offer>
 
                 <select
-                  focused
+                  // focused = {.toString()}
                   style={{ border: "solid black" }}
                   value={prod.qty}
                   onChange={(e) =>

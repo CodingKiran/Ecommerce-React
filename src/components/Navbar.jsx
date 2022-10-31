@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 
 // MUI Icons
 import { Typography } from "@mui/material";
-import PersonIcon from "@mui/icons-material/Person";
+// import PersonIcon from "@mui/icons-material/Person";
 // import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import Badge from "@mui/material/Badge";
@@ -96,7 +96,7 @@ const Navbar = (prod) => {
 
         <RightSide>
           {/* Wrapper One - Profile */}
-          <Link
+          {/* <Link
             to="/profile"
             style={{
               textDecoration: "none",
@@ -108,7 +108,7 @@ const Navbar = (prod) => {
               <PersonIcon sx={{ textAlign: "center", margin: "auto" }} />
               <Typography>Profile</Typography>
             </Wrapper>
-          </Link>
+          </Link> */}
 
           {/* Wrapper Two - Wishlist */}
           {/* <Link

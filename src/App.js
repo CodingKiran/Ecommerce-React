@@ -8,7 +8,7 @@ import Bag from "./pages/Bag";
 
 import { CartState } from "./context/CartContext";
 import ProductPage from "./components/ProductPage";
-import Profile from "./pages/Profile";
+
 
 const GlobalStyle = createGlobalStyle`
 body { 
@@ -77,7 +77,7 @@ function App() {
 
         <Routes>
           <Route path="/" element={<Home key={1} />} />
-          <Route path="/profile" element={<Profile key={2} />} />
+          {/* <Route path="/profile" element={<Profile key={2} />} /> */}
           <Route path="/cart" element={<Bag key={3} />} />
           {/* <Route path="/wishlist" element={<Wishlist key={4} />} /> */}
           <Route path="/productpage" element={<ProductPage key={4} />} />
